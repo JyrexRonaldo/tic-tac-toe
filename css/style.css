@@ -1,9 +1,15 @@
-body {
-    height: 100vh;
-    background-color: green;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
 }
 
-body div:first-child {
+body {
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+body > div:first-child {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +24,7 @@ body > div:nth-child(2) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 body > div > p {
@@ -27,7 +33,33 @@ body > div > p {
 
 body > div > div {
     background-color: white;
-    width: 450px;
-    height: 450px;
+    width: 456px;
+    height: 456px;
     border: 3px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+body > div > div  div {
+    width: calc(450px / 3);
+    height: calc(450px / 3);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 7rem;
+    border: 1px solid black;
+}
+
+body > div > div  div:hover {
+    background-color: #D8E4E9;
+}
+
+button {
+    font-size: 3rem;
+    padding: 10px 25px;
+    border-radius: 15px;
+}
+
+footer {
+    font-size: 1.5rem;
 }
