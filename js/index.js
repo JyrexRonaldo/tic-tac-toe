@@ -1,6 +1,16 @@
 const gameBoard = (function () {
-  const gameBoard = ["", "", "", "", "", "", "", "", ""];
-  return { gameBoard };
+  let gameBoard = ["", "", "", "", "", "", "", "", ""];
+  const clearGameBoard = () => {
+    gameBoard = ["", "", "", "", "", "", "", "", ""];
+    return gameBoard;
+  }
+  const getGameBoard = () => {
+    return gameBoard;
+  }
+  return { 
+    getGameBoard,
+    clearGameBoard
+   };
 })();
 
 const player = function (marker) {
@@ -9,7 +19,7 @@ const player = function (marker) {
 
 const displayController = (function (array, doc) {
   const updateDisplay = () => {
-    array.forEach((mark, index) => {
+    (array.getGameBoard()).forEach((mark, index) => {
       const spot = doc.createElement("div");
       spot.setAttribute("data-index", index);
       spot.textContent = mark;
@@ -25,7 +35,7 @@ const displayController = (function (array, doc) {
     updateDisplay,
     clearDisplay,
   };
-})(gameBoard.gameBoard, document);
+})(gameBoard, document);
 
 const game = (function (array, display, doc) {
   const playerX = player("x");
@@ -34,15 +44,6 @@ const game = (function (array, display, doc) {
   const restartButton = doc.querySelector("[type=button]");
   display.updateDisplay();
   placeMarker();
-
-  restartButton.addEventListener("click", (e) => {
-    currentPlayer = null;
-    array = ["", "", "", "", "", "", "", "", ""];
-    console.log(array);
-    display.clearDisplay();
-    display.updateDisplay();
-    placeMarker();
-  });
 
   function switchPlayer() {
   
@@ -64,38 +65,47 @@ const game = (function (array, display, doc) {
 
   function checkPattern(symbol) {
     switch (true) {
-      case array[2] === `${symbol}` && array[5] === `${symbol}` && array[8] === `${symbol}`:
+      case array.getGameBoard()[2] === `${symbol}` && array.getGameBoard()[5] === `${symbol}` && array.getGameBoard()[8] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[1] === `${symbol}` && array[4] === `${symbol}` && array[7] === `${symbol}`:
+      case array.getGameBoard()[1] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[7] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[0] === `${symbol}` && array[3] === `${symbol}` && array[6] === `${symbol}`:
+      case array.getGameBoard()[0] === `${symbol}` && array.getGameBoard()[3] === `${symbol}` && array.getGameBoard()[6] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[0] === `${symbol}` && array[1] === `${symbol}` && array[2] === `${symbol}`:
+      case array.getGameBoard()[0] === `${symbol}` && array.getGameBoard()[1] === `${symbol}` && array.getGameBoard()[2] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[3] === `${symbol}` && array[4] === `${symbol}` && array[5] === `${symbol}`:
+      case array.getGameBoard()[3] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[5] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[6] === `${symbol}` && array[7] === `${symbol}` && array[8] === `${symbol}`:
+      case array.getGameBoard()[6] === `${symbol}` && array.getGameBoard()[7] === `${symbol}` && array.getGameBoard()[8] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[0] === `${symbol}` && array[4] === `${symbol}` && array[8] === `${symbol}`:
+      case array.getGameBoard()[0] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[8] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[2] === `${symbol}` && array[4] === `${symbol}` && array[6] === `${symbol}`:
+      case array.getGameBoard()[2] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[6] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[1] === `${symbol}` && array[4] === `${symbol}` && array[7] === `${symbol}`:
+      case array.getGameBoard()[1] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[7] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
-      case array[3] === `${symbol}` && array[4] === `${symbol}` && array[5] === `${symbol}`:
+      case array.getGameBoard()[3] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[5] === `${symbol}`:
         console.log(`${symbol} won`);
         break;
     }
   }
+
+  restartButton.addEventListener("click", (e) => {
+    currentPlayer = null;
+    array.clearGameBoard();
+    console.log(array.getGameBoard());
+    display.clearDisplay();
+    display.updateDisplay();
+    placeMarker();
+  });
 
   function placeMarker() {
     const spots = doc.querySelectorAll("[data-index]");
@@ -103,10 +113,10 @@ const game = (function (array, display, doc) {
       spot.addEventListener("click", (e) => {
         const spotIndex = e.target.getAttribute("data-index");
         console.log(spotIndex);
-        if (array[spotIndex] == "") {
-          array[spotIndex] = switchPlayer().marker;
+        if (array.getGameBoard()[spotIndex] == "") {
+          array.getGameBoard()[spotIndex] = switchPlayer().marker;
           display.clearDisplay();
-          console.log(array);
+          console.log(array.getGameBoard());
           display.updateDisplay();
           placeMarker();
         }
@@ -114,4 +124,4 @@ const game = (function (array, display, doc) {
     });
     checkWin();
   }
-})(gameBoard.gameBoard, displayController, document);
+})(gameBoard, displayController, document);
