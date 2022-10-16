@@ -28,9 +28,34 @@ const displayController = (function (array, doc) {
 })(gameBoard.gameBoard, document);
 
 const game = (function (array, display, doc) {
-  const jyrex = player("o");
+  const playerX = player("x");
+  const playerO = player("o");
+  let currentPlayer = null;
+  const restartButton = doc.querySelector("[type=button]");
   display.updateDisplay();
-  attachEvent();
+  placeMarker();
+
+  restartButton.addEventListener("click", (e) => {
+    currentPlayer = null;
+    array = ["", "", "", "", "", "", "", "", ""];
+    console.log(array);
+    display.clearDisplay();
+    display.updateDisplay();
+    placeMarker();
+  });
+
+  function switchPlayer() {
+  
+    if (currentPlayer === null) {
+      currentPlayer = playerX
+    } else if (currentPlayer === playerX) {
+      currentPlayer = playerO
+    } else if (currentPlayer === playerO) {
+      currentPlayer = playerX
+    }
+    return currentPlayer
+
+  }
 
   function checkWin() {
     checkPattern("x")
@@ -72,21 +97,21 @@ const game = (function (array, display, doc) {
     }
   }
 
-  function attachEvent() {
+  function placeMarker() {
     const spots = doc.querySelectorAll("[data-index]");
     spots.forEach((spot) => {
       spot.addEventListener("click", (e) => {
         const spotIndex = e.target.getAttribute("data-index");
         console.log(spotIndex);
         if (array[spotIndex] == "") {
-          array[spotIndex] = jyrex.marker;
+          array[spotIndex] = switchPlayer().marker;
           display.clearDisplay();
           console.log(array);
           display.updateDisplay();
-          attachEvent();
+          placeMarker();
         }
       });
     });
-    checkWin(array);
+    checkWin();
   }
 })(gameBoard.gameBoard, displayController, document);
