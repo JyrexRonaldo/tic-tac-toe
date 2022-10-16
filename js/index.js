@@ -42,17 +42,21 @@ const game = (function (array, display, doc) {
   const playerO = player("o");
   let currentPlayer = null;
   const restartButton = doc.querySelector("[type=button]");
+  const playerPrompt = doc.querySelector("div > p");
   display.updateDisplay();
   placeMarker();
 
   function switchPlayer() {
   
     if (currentPlayer === null) {
-      currentPlayer = playerX
+      currentPlayer = playerX;
+      playerPrompt.textContent = "Player O's turn";
     } else if (currentPlayer === playerX) {
-      currentPlayer = playerO
+      currentPlayer = playerO;
+      playerPrompt.textContent = "Player X's turn";
     } else if (currentPlayer === playerO) {
-      currentPlayer = playerX
+      currentPlayer = playerX;
+      playerPrompt.textContent = "Player O's turn";
     }
     return currentPlayer
 
