@@ -28,9 +28,46 @@ const displayController = (function (array, doc) {
 })(gameBoard.gameBoard, document);
 
 const game = (function (array, display, doc) {
-  const jyrex = player("");
+  const jyrex = player("x");
   display.updateDisplay();
   attachEvent();
+
+  function checkWin(array) {
+    switch (true) {
+      case array[2] === "x" && array[5] === "x" && array[8] === "x":
+        console.log("Ass won again");
+        break;
+      case array[1] === "x" && array[4] === "x" && array[7] === "x":
+        console.log("Ass won again");
+        break;
+      case array[0] === "x" && array[3] === "x" && array[6] === "x":
+        console.log("Ass won again");
+        break;
+      case array[0] === "x" && array[1] === "x" && array[2] === "x":
+        console.log("Ass won again");
+        break;
+      case array[3] === "x" && array[4] === "x" && array[5] === "x":
+        console.log("Ass won again");
+        break;
+      case array[6] === "x" && array[7] === "x" && array[8] === "x":
+        console.log("Ass won again");
+        break;
+      case array[0] === "x" && array[4] === "x" && array[8] === "x":
+        console.log("Ass won again");
+        break;
+      case array[2] === "x" && array[4] === "x" && array[6] === "x":
+        console.log("Ass won again");
+        break;
+      case array[1] === "x" && array[4] === "x" && array[7] === "x":
+        console.log("Ass won again");
+        break;
+      case array[3] === "x" && array[4] === "x" && array[5] === "x":
+        console.log("Ass won again");
+        break;
+    }
+  }
+
+  function checkPattern(symbol) {}
 
   function attachEvent() {
     const spots = doc.querySelectorAll("[data-index]");
@@ -47,5 +84,6 @@ const game = (function (array, display, doc) {
         }
       });
     });
+    checkWin(array);
   }
 })(gameBoard.gameBoard, displayController, document);
