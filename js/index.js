@@ -43,6 +43,7 @@ const game = (function (array, display, doc) {
   let currentPlayer = null;
   const restartButton = doc.querySelector("[type=button]");
   const playerPrompt = doc.querySelector("div > p");
+  let emptyStringCount = 9
   display.updateDisplay();
   placeMarker();
 
@@ -63,42 +64,63 @@ const game = (function (array, display, doc) {
   }
 
   function checkWin() {
-    checkPattern("x")
-    checkPattern("o")
+    let winner = checkPattern("x") || checkPattern("o");
+    console.log(winner);
+    
+    if (winner) {
+      if (playerX.marker === winner.charAt(0)) {
+        playerPrompt.textContent = "Player X has won!";
+      } else if (playerO.marker === winner.charAt(0)) {
+        playerPrompt.textContent = "Player O has won!";
+      } 
+    }
+
+    if (!winner) {
+      checkBoard()
+    }
+    
   }
+
+  function checkBoard() {
+    for (let i = 0; i < gameBoard.getGameBoard().length; i++) {
+      const element = gameBoard.getGameBoard()[i];
+      if (element === "") {
+        emptyStringCount--
+        console.log(emptyStringCount)
+        return
+      }
+
+      if (emptyStringCount === 0) {
+        playerPrompt.textContent = "It's a tie"
+      }
+      
+    }
+  }
+
+
 
   function checkPattern(symbol) {
     switch (true) {
       case array.getGameBoard()[2] === `${symbol}` && array.getGameBoard()[5] === `${symbol}` && array.getGameBoard()[8] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[1] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[7] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[0] === `${symbol}` && array.getGameBoard()[3] === `${symbol}` && array.getGameBoard()[6] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[0] === `${symbol}` && array.getGameBoard()[1] === `${symbol}` && array.getGameBoard()[2] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[3] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[5] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[6] === `${symbol}` && array.getGameBoard()[7] === `${symbol}` && array.getGameBoard()[8] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[0] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[8] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[2] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[6] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[1] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[7] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
       case array.getGameBoard()[3] === `${symbol}` && array.getGameBoard()[4] === `${symbol}` && array.getGameBoard()[5] === `${symbol}`:
-        console.log(`${symbol} won`);
-        break;
+        return (`${symbol} won`);
     }
   }
 
