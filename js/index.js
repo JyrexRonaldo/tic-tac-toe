@@ -28,46 +28,49 @@ const displayController = (function (array, doc) {
 })(gameBoard.gameBoard, document);
 
 const game = (function (array, display, doc) {
-  const jyrex = player("x");
+  const jyrex = player("o");
   display.updateDisplay();
   attachEvent();
 
-  function checkWin(array) {
+  function checkWin() {
+    checkPattern("x")
+    checkPattern("o")
+  }
+
+  function checkPattern(symbol) {
     switch (true) {
-      case array[2] === "x" && array[5] === "x" && array[8] === "x":
-        console.log("Ass won again");
+      case array[2] === `${symbol}` && array[5] === `${symbol}` && array[8] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[1] === "x" && array[4] === "x" && array[7] === "x":
-        console.log("Ass won again");
+      case array[1] === `${symbol}` && array[4] === `${symbol}` && array[7] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[0] === "x" && array[3] === "x" && array[6] === "x":
-        console.log("Ass won again");
+      case array[0] === `${symbol}` && array[3] === `${symbol}` && array[6] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[0] === "x" && array[1] === "x" && array[2] === "x":
-        console.log("Ass won again");
+      case array[0] === `${symbol}` && array[1] === `${symbol}` && array[2] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[3] === "x" && array[4] === "x" && array[5] === "x":
-        console.log("Ass won again");
+      case array[3] === `${symbol}` && array[4] === `${symbol}` && array[5] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[6] === "x" && array[7] === "x" && array[8] === "x":
-        console.log("Ass won again");
+      case array[6] === `${symbol}` && array[7] === `${symbol}` && array[8] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[0] === "x" && array[4] === "x" && array[8] === "x":
-        console.log("Ass won again");
+      case array[0] === `${symbol}` && array[4] === `${symbol}` && array[8] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[2] === "x" && array[4] === "x" && array[6] === "x":
-        console.log("Ass won again");
+      case array[2] === `${symbol}` && array[4] === `${symbol}` && array[6] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[1] === "x" && array[4] === "x" && array[7] === "x":
-        console.log("Ass won again");
+      case array[1] === `${symbol}` && array[4] === `${symbol}` && array[7] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
-      case array[3] === "x" && array[4] === "x" && array[5] === "x":
-        console.log("Ass won again");
+      case array[3] === `${symbol}` && array[4] === `${symbol}` && array[5] === `${symbol}`:
+        console.log(`${symbol} won`);
         break;
     }
   }
-
-  function checkPattern(symbol) {}
 
   function attachEvent() {
     const spots = doc.querySelectorAll("[data-index]");
