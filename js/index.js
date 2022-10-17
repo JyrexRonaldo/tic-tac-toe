@@ -70,8 +70,10 @@ const game = (function (array, display, doc) {
     if (winner) {
       if (playerX.marker === winner.charAt(0)) {
         playerPrompt.textContent = "Player X has won!";
+        endMarking();
       } else if (playerO.marker === winner.charAt(0)) {
         playerPrompt.textContent = "Player O has won!";
+        endMarking();
       } 
     }
 
@@ -92,9 +94,17 @@ const game = (function (array, display, doc) {
 
       if (emptyStringCount === 0) {
         playerPrompt.textContent = "It's a tie"
+        endMarking()
       }
       
     }
+  }
+
+  function endMarking() {
+    const spots = doc.querySelectorAll("[data-index]");
+    spots.forEach((spot) => {
+        spot.removeEventListener("click", attachPlacer);
+    });
   }
 
 
@@ -136,18 +146,36 @@ const game = (function (array, display, doc) {
   function placeMarker() {
     const spots = doc.querySelectorAll("[data-index]");
     spots.forEach((spot) => {
-      spot.addEventListener("click", (e) => {
-        const spotIndex = e.target.getAttribute("data-index");
-        console.log(spotIndex);
-        if (array.getGameBoard()[spotIndex] == "") {
-          array.getGameBoard()[spotIndex] = switchPlayer().marker;
-          display.clearDisplay();
-          console.log(array.getGameBoard());
-          display.updateDisplay();
-          placeMarker();
-        }
-      });
+        spot.addEventListener("click", attachPlacer);
     });
     checkWin();
   }
+
+  function attachPlacer(e) {
+    const spotIndex = e.target.getAttribute("data-index");
+    console.log(spotIndex);
+    if (array.getGameBoard()[spotIndex] == "") {
+      array.getGameBoard()[spotIndex] = switchPlayer().marker;
+      display.clearDisplay();
+      console.log(array.getGameBoard());
+      display.updateDisplay();
+      placeMarker();
+    }
+  }
+
 })(gameBoard, displayController, document);
+
+
+
+
+// {
+//   const spotIndex = e.target.getAttribute("data-index");
+//   console.log(spotIndex);
+//   if (array.getGameBoard()[spotIndex] == "") {
+//     array.getGameBoard()[spotIndex] = switchPlayer().marker;
+//     display.clearDisplay();
+//     console.log(array.getGameBoard());
+//     display.updateDisplay();
+//     placeMarker();
+//   }
+// }
