@@ -1,11 +1,11 @@
 const gameBoard = (function () {
-  let gameBoard = ["", "", "", "", "", "", "", "", ""];
+  let _gameBoard = ["", "", "", "", "", "", "", "", ""];
   const clearGameBoard = () => {
-    gameBoard = ["", "", "", "", "", "", "", "", ""];
-    return gameBoard;
+    _gameBoard = ["", "", "", "", "", "", "", "", ""];
+    return _gameBoard;
   }
   const getGameBoard = () => {
-    return gameBoard;
+    return _gameBoard;
   }
   return { 
     getGameBoard,
@@ -60,12 +60,11 @@ const game = (function (array, display, doc) {
       playerPrompt.textContent = "Player O's turn";
     }
     return currentPlayer
-
   }
 
   function checkWin() {
     let winner = checkPattern("x") || checkPattern("o");
-    console.log(winner);
+    
     
     if (winner) {
       if (playerX.marker === winner.charAt(0)) {
@@ -80,7 +79,6 @@ const game = (function (array, display, doc) {
     if (!winner) {
       checkBoard()
     }
-    
   }
 
   function checkBoard() {
@@ -88,7 +86,6 @@ const game = (function (array, display, doc) {
       const element = gameBoard.getGameBoard()[i];
       if (element === "") {
         emptyStringCount--
-        console.log(emptyStringCount)
         return
       }
 
@@ -135,9 +132,10 @@ const game = (function (array, display, doc) {
   }
 
   restartButton.addEventListener("click", (e) => {
+    playerPrompt.textContent = "Player X's turn"
+    emptyStringCount = 9
     currentPlayer = null;
     array.clearGameBoard();
-    console.log(array.getGameBoard());
     display.clearDisplay();
     display.updateDisplay();
     placeMarker();
@@ -153,29 +151,12 @@ const game = (function (array, display, doc) {
 
   function attachPlacer(e) {
     const spotIndex = e.target.getAttribute("data-index");
-    console.log(spotIndex);
     if (array.getGameBoard()[spotIndex] == "") {
       array.getGameBoard()[spotIndex] = switchPlayer().marker;
       display.clearDisplay();
-      console.log(array.getGameBoard());
       display.updateDisplay();
       placeMarker();
     }
   }
 
 })(gameBoard, displayController, document);
-
-
-
-
-// {
-//   const spotIndex = e.target.getAttribute("data-index");
-//   console.log(spotIndex);
-//   if (array.getGameBoard()[spotIndex] == "") {
-//     array.getGameBoard()[spotIndex] = switchPlayer().marker;
-//     display.clearDisplay();
-//     console.log(array.getGameBoard());
-//     display.updateDisplay();
-//     placeMarker();
-//   }
-// }
