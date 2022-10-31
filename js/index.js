@@ -43,13 +43,13 @@ const displayController = (function (array, doc) {
 
   const showDisplay = () => {
     doc.querySelector(".prompt").style.display = "flex";
-  }
+  };
 
   return {
     updateDisplay,
     clearDisplay,
     clearPrompt,
-    showDisplay
+    showDisplay,
   };
 })(gameBoard, document);
 
@@ -75,8 +75,8 @@ const game = (function (array, display, doc) {
   function setPlayerInfo() {
     playerX = playerXName.value ? player("x", playerXName.value) : player("x");
     playerO = playerOName.value ? player("o", playerOName.value) : player("o");
-    playerXName.value = ""
-    playerOName.value = ""
+    playerXName.value = "";
+    playerOName.value = "";
   }
 
   function switchPlayer() {
@@ -167,20 +167,12 @@ const game = (function (array, display, doc) {
         array.getGameBoard()[4] === `${symbol}` &&
         array.getGameBoard()[6] === `${symbol}`:
         return `${symbol} won`;
-      case array.getGameBoard()[1] === `${symbol}` &&
-        array.getGameBoard()[4] === `${symbol}` &&
-        array.getGameBoard()[7] === `${symbol}`:
-        return `${symbol} won`;
-      case array.getGameBoard()[3] === `${symbol}` &&
-        array.getGameBoard()[4] === `${symbol}` &&
-        array.getGameBoard()[5] === `${symbol}`:
-        return `${symbol} won`;
     }
   }
 
   restartButton.addEventListener("click", (e) => {
-    displayController.showDisplay()
-    setPlayerInfo()
+    displayController.showDisplay();
+    setPlayerInfo();
     playerPrompt.textContent = ``;
     emptyStringCount = 9;
     currentPlayer = null;
