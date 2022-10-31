@@ -105,3 +105,50 @@ footer {
 footer {
     font-size: 1.5rem;
 }
+
+.prompt {
+    position: fixed;
+    top: 0;
+    background-color: #787778bb;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prompt form {
+    font-size: 30px;
+    width: 400px;
+    height: 300px;
+    background-color: #C5C3C6;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 600px;
+}
+.prompt :not(p:first-child) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+form input {
+    height: 35px;
+    width: 250px;
+    border-radius: 30px;
+    border-style: none;
+    font-size: 18px;
+    padding: 13px;
+}
+
+.prompt button {
+    margin-top: 18px;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
