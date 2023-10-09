@@ -36,7 +36,7 @@ body > div:nth-child(2) {
     padding-top: 40px;
 }
 
-.grid {
+.board {
     width: 486px;
     height: 486px;
     border: 3px solid black;
@@ -44,17 +44,18 @@ body > div:nth-child(2) {
     flex-wrap: wrap;
 }
 
-.grid > button {
+.board > button {
     /* flex-grow: 1; */
     width: 160px;
     height: 160px;
+    font-size: 100px;
 }
 
-.grid > button:hover {
+.board > button:hover {
     background-color: #D8E4E9;
 }
 
-.grid + button {
+.board + button {
     font-size: inherit;
     padding: 11px 30px;
     border-radius: 14px;
