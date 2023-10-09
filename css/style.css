@@ -1,0 +1,61 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+body > div:first-child {
+    height: 15.5vh;   
+    background-color: #4C5C68;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    /* font-weight: bolder; */
+    font-size: 5.5rem;
+    color: #B0E4DB;
+}
+
+body > div:nth-child(2) {
+    height: 84.5vh;   
+    background-color: #C5C3C6;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    font-size: 3rem;
+    padding-top: 40px;
+}
+
+.grid {
+    width: 486px;
+    height: 486px;
+    border: 3px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid > button {
+    /* flex-grow: 1; */
+    width: 160px;
+    height: 160px;
+}
+
+.grid > button:hover {
+    background-color: #D8E4E9;
+}
+
+.grid + button {
+    font-size: inherit;
+    padding: 11px 30px;
+    border-radius: 14px;
+}
