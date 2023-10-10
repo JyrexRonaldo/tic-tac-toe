@@ -1,5 +1,5 @@
 const gameboard = (function() {
-    const board = ["", "", "", "", "", "", "", "", ""]
+    let board = ["", "", "", "", "", "", "", "", ""]
     const getBoard = () => {
         return board;
     }
@@ -10,10 +10,15 @@ const gameboard = (function() {
         }
         board[index] = marker;
     }
+
+    const resetBoard = () => {
+        board = ["", "", "", "", "", "", "", "", ""];
+    }
     
     return {
         getBoard,
-        addMarker
+        addMarker,
+        resetBoard
     }
 })()
 
@@ -22,7 +27,7 @@ function player(name, marker) {
 }
 
 const gameController = (function() {
-    const board = gameboard.getBoard()
+    let board = gameboard.getBoard()
     let addCode = 1
     
     const players = [ 
@@ -58,7 +63,6 @@ const gameController = (function() {
     }
 
     function playRound(index) {
-        
         if (addCode) {
             gameboard.addMarker(activePlayer.marker, index)    
         } 
@@ -75,7 +79,6 @@ const gameController = (function() {
                 gameStatus = `${activePlayer.name}'s turn`
             }
         }
-        console.log(isBoardFull())
     }
 
     function isBoardFull() {
@@ -90,17 +93,27 @@ const gameController = (function() {
     function getGameStatus() {
         return gameStatus;
     }
+
+    function resetGame() {
+        gameboard.resetBoard();
+        addCode = 1;
+        activePlayer = players[0];
+        gameStatus = `${activePlayer.name}'s turn`;
+        board = gameboard.getBoard()
+    }
  
     return {
         getGameStatus,
-        playRound
+        playRound,
+        resetGame
     }
 
 })()
 
 const screenController = (function () {
     const boardDiv = document.querySelector(".board");
-    const infoDiv = document.querySelector(".turn")
+    const infoDiv = document.querySelector(".turn");
+    const restartButton = document.querySelector(".reset");
 
     const updateScreen = () => {
         boardDiv.textContent = "";
@@ -117,6 +130,11 @@ const screenController = (function () {
 
     boardDiv.addEventListener("click", (e) => {
         gameController.playRound(e.target.dataset.index)
+        updateScreen()
+    })
+
+    restartButton.addEventListener("click", (e) => {
+        gameController.resetGame()
         updateScreen()
     })
 
