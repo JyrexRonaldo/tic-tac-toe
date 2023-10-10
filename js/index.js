@@ -63,6 +63,10 @@ const gameController = (function() {
     }
 
     function playRound(index) {
+        if (board[index] !== "") {
+            return
+        }
+
         if (addCode) {
             gameboard.addMarker(activePlayer.marker, index)    
         } 

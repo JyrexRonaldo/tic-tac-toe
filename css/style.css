@@ -19,7 +19,6 @@ body > div:first-child {
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-    /* font-weight: bolder; */
     font-size: 5.5rem;
     color: #B0E4DB;
 }
@@ -45,7 +44,6 @@ body > div:nth-child(2) {
 }
 
 .board > button {
-    /* flex-grow: 1; */
     width: 160px;
     height: 160px;
     font-size: 100px;
