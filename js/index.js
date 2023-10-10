@@ -1,15 +1,18 @@
 const gameboard = (function() {
-    const board = [ 
-        "X", "O", "X", 
-        "O", "X", "O", 
-        "O", "O", "X"
-    ] 
-    // const board = ["", "", "", "", "", "", "", "", ""]
+    // const board = [ 
+    //     "X", "O", "X", 
+    //     "O", "X", "O", 
+    //     "O", "O", "X"
+    // ] 
+    const board = ["", "", "", "", "", "", "", "", ""]
     const getBoard = () => {
         return board;
     }
     
     const addMarker = (marker, index) => {
+        if (board[index]) {
+            return 
+        }
         board[index] = marker;
     }
     
@@ -34,7 +37,10 @@ const gameController = (function() {
     let activePlayer = players[0];
 
     const switchPlayerTurn = () => {
-        activePlayer = (activePlayer === player[0]) ? players[1] : players[0]; 
+        console.log(activePlayer)
+        activePlayer = activePlayer === players[0] ? players[1] : players[0]; 
+        console.log("yeah")
+        
     }
 
     function checkPattern(board, marker) {
@@ -59,12 +65,23 @@ const gameController = (function() {
     console.log(checkPattern(board, "X"))
     console.log(checkPattern(board, "O"))
 
-    function getWinner(board, players) {
-        if (checkPattern(board, players[0].marker) === true) {
-            return players[0];
-        } else if (checkPattern(board, players[1].marker) === true) {
-            return players[1]
+    function getWinner(board, player) {
+        if (checkPattern(board, player.marker) === true) {
+            return player;
+        } else {
+            return false
         }
+    }
+
+    function playRound(index) {
+        gameboard.addMarker(activePlayer.marker, index)
+
+        if (getWinner(gameboard.getBoard(), activePlayer)) {
+            console.log(`${activePlayer.name} has won `)
+        }
+
+        switchPlayerTurn()    
+        console.log(gameboard.getBoard())
     }
 
     console.log(getWinner(board, players))
@@ -74,6 +91,10 @@ const gameController = (function() {
     // addMarker("o", 2)
     // addMarker("o", 1)
     console.log(board)
+
+    return {
+        playRound
+    }
 
 })()
 
