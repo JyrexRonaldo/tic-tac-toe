@@ -12,7 +12,7 @@ body {
     font-family: sans-serif;
 }
 
-body > div:first-child {
+body > div:nth-child(2) {
     height: 15.5vh;   
     background-color: #4C5C68;
     display: flex;
@@ -23,7 +23,7 @@ body > div:first-child {
     color: #B0E4DB;
 }
 
-body > div:nth-child(2) {
+body > div:nth-child(3) {
     height: 84.5vh;   
     background-color: #C5C3C6;
     display: flex;
@@ -57,4 +57,45 @@ body > div:nth-child(2) {
     font-size: inherit;
     padding: 11px 30px;
     border-radius: 14px;
+}
+
+.dialog-div {
+    display: flex;
+    flex-direction: column;
+    /* width: 200px; */
+    height: 300px;
+    font-size: 2rem;
+}
+
+.dialog-div form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    /* align-items: center; */
+}
+
+.dialog-div button {
+    font-size: 1.5rem;
+    align-self: center;
+    padding: 5px 20px;    
+}
+
+.dialog-div  input{
+    height: 43px;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    padding: 5px 10px ;
+}
+
+.dialog-div > div {
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+dialog {
+    border-radius: 15px;
+    border: none;
+    background-color: #C5C3C6;
 }

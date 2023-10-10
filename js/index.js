@@ -30,7 +30,7 @@ const gameController = (function() {
     let board = gameboard.getBoard()
     let addCode = 1
     
-    const players = [ 
+    let players = [ 
         player("Kaiden", "X"),
         player("Alenko", "O")
     ]
@@ -105,11 +105,21 @@ const gameController = (function() {
         gameStatus = `${activePlayer.name}'s turn`;
         board = gameboard.getBoard()
     }
+
+    function createPlayers(playerXName = "Kaiden", playerOName = "Alenko") {
+             playerXName = playerXName === "" ? "Kaiden" : playerXName;
+             playerOName = playerOName === "" ? "Alenko" : playerOName;
+             players = [ 
+            player(playerXName, "X"),
+            player(playerOName, "O")
+        ]
+    }
  
     return {
         getGameStatus,
         playRound,
-        resetGame
+        resetGame,
+        createPlayers
     }
 
 })()
@@ -118,6 +128,11 @@ const screenController = (function () {
     const boardDiv = document.querySelector(".board");
     const infoDiv = document.querySelector(".turn");
     const restartButton = document.querySelector(".reset");
+    const dialogBox = document.querySelector("dialog");
+    const formCloseBtn = document.querySelector(".dialog-div > div")
+    const formButton = document.querySelector("form button");
+    const playerXInput = document.querySelector("#playerX");
+    const playerOInput = document.querySelector("#playerO");
 
     const updateScreen = () => {
         boardDiv.textContent = "";
@@ -135,13 +150,22 @@ const screenController = (function () {
     boardDiv.addEventListener("click", (e) => {
         gameController.playRound(e.target.dataset.index)
         updateScreen()
-    })
+    });
 
     restartButton.addEventListener("click", (e) => {
         gameController.resetGame()
         updateScreen()
+        dialogBox.showModal()
+    });
+    
+    formCloseBtn.addEventListener("click", (e) => {
+        dialogBox.close()
+    });
+
+    formButton.addEventListener("click", () => {
+        gameController.createPlayers(playerXInput.value, playerOInput.value)
+        gameController.resetGame()
+        updateScreen()
     })
-
     updateScreen()
-
 })()
